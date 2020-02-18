@@ -1,0 +1,40 @@
+---
+title: "LassoRiboflavin"
+author: "Nathan"
+date: "April 23, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(hdi)
+```
+
+# Data description and preprocessing
+
+We consider the `hdi` package
+
+```{r, message = FALSE}
+data(riboflavin)
+```
+
+The dimension `r dim(riboflavin$x)`
+
+# Analysis via Lasso regression
+
+Let's create the matrix with 500 largest SD.
+
+```{r}
+x <- riboflavin$x
+sd_all <- apply(x, 2, sd)
+nselect <- 500
+x_reduced <- x[ , order(sd_all, decreasing = T)[1:nselect]]
+```
+
+$$
+\boldsymbol{x}
+$$
+
+```{r}
+source("LassoFunctions.R")
+```
